@@ -1,10 +1,3 @@
-# More info:
-#   https://github.com/jcheng5/googleCharts
-# Install:
-#   devtools::install_github("jcheng5/googleCharts")
-library(googleCharts)
-library(googleVis)
-
 # Use global max/min for axes so the view window stays
 # constant as the user moves between years
 xlim <- list(
@@ -38,7 +31,7 @@ shinyUI(fluidPage(
 #         rel="stylesheet", type="text/css"),
         
     tags$style(type="text/css",
-               "body {font-family: 'Source Sans Pro'}"
+               "body {font-family: Helvetica, Arial, 'Source Sans Pro'}"
     ),
     
 #     h1("Life Expectancy by Health Expenditure by Province"),
@@ -50,7 +43,7 @@ shinyUI(fluidPage(
                       # https://developers.google.com/chart/interactive/docs/gallery/bubblechart
                       # for option documentation.
                       options = list(
-                          fontName = "Source Sans Pro",
+                          fontName = "sans-serif",
                           fontSize = 13,
                           # Set axis labels and ranges
                           hAxis = list(
@@ -95,8 +88,8 @@ shinyUI(fluidPage(
                           sizeAxis = list(
                               minSize = 5,
                               maxSize = 20,
-                              minValue = min(data$Population),
-                              maxValue = max(data$Population)
+                              minValue = min(dataset$Population),
+                              maxValue = max(dataset$Population)
                           ),
                           animation = list(
                               'duration' = 1000,
@@ -108,11 +101,10 @@ shinyUI(fluidPage(
     fluidRow(
         shiny::column(4, offset = 4,
                       sliderInput("year", "Year",
-                                  min = min(data$Year), max = max(data$Year),
-                                  value = min(data$Year), animate = TRUE)
+                                  min = min(dataset$Year), max = max(dataset$Year),
+                                  value = min(dataset$Year), animate = TRUE)
         )
     ),
     fluidRow(
-        
     )
 ))

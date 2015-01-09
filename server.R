@@ -1,6 +1,3 @@
-library(dplyr)
-library(googleVis)
-
 shinyServer(function(input, output, session) {
     
     # Provide explicit colors for regions, so they don't get recoded when the
@@ -10,7 +7,7 @@ shinyServer(function(input, output, session) {
                        "#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6")
     series <- structure(
         lapply(defaultColors, function(color) { list(color=color) }),
-        names = levels(data$Country)
+        names = levels(dataset$Province)
     )
     
     yearData <- reactive({
@@ -19,9 +16,9 @@ shinyServer(function(input, output, session) {
         # them (name, x, y, color, size). Also sort by region
         # so that Google Charts orders and colors the regions
         # consistently.
-        df <- data %.%
+        df <- dataset %.%
             filter(Year == input$year) %.%
-            select(Country, Health.Expenditure, Life.Expectancy, NULL, Population)
+            select(Province, Health.Expenditure, Life.Expectancy, NULL, Population)
     })
     
     output$chart <- reactive({
@@ -37,8 +34,4 @@ shinyServer(function(input, output, session) {
         )
     })
     
-#     output$motion <- reactive({
-#         motion = gvisMotionChart(data, idvar="Country", timevar="Year"),
-#         output$motion <- plot(motion)
-#     })
 })
