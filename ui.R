@@ -61,7 +61,9 @@ shinyUI(fluidPage(
                           ),
                           # Allow pan/zoom
                           explorer = list(
-                              'keepInBounds' = TRUE
+                              'keepInBounds' = TRUE,
+                              'maxZoomIn' = 1,
+                              'maxZoomOut' = 1
                           ),
                           # Set bubble visual props
                           bubble = list(
